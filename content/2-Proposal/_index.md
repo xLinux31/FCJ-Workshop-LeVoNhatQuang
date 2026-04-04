@@ -5,111 +5,199 @@ weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-In this section, you need to summarize the contents of the workshop that you **plan** to conduct.
-
-# IoT Weather Platform for Lab Research
-## A Unified AWS Serverless Solution for Real-Time Weather Monitoring
+# AI-Assisted Electronics Production Management System
+## (A unified AWS-based platform for production planning and monitoring)
 
 ### 1. Executive Summary
-The IoT Weather Platform is designed for the ITea Lab team in Ho Chi Minh City to enhance weather data collection and analysis. It supports up to 5 weather stations, with potential scalability to 10-15, utilizing Raspberry Pi edge devices with ESP32 sensors to transmit data via MQTT. The platform leverages AWS Serverless services to deliver real-time monitoring, predictive analytics, and cost efficiency, with access restricted to 5 lab members via Amazon Cognito.
+The AI-Assisted Production Management System is designed for small and medium-sized electronics manufacturing enterprises (SMEs) to improve order management, production planning, and production monitoring.
+The system supports multiple production lines (SMT, DIP, testing) and can scale as the number of orders and lines increases. The platform allows centralized management of production data, visualizes progress, and detects delays early at each stage.
+The solution leverages AWS services such as ECS, ECR, RDS, S3, CloudFront, Route 53, CloudWatch, Secrets Manager, SNS, SQS, and SES to ensure system stability, security, scalability, and cost optimization.
+
+In addition, the system integrates an AI component to help users quickly look up information related to orders, production schedules, OEE indicators, Gantt charts, and simple delay scenarios. Users can ask natural questions such as "Which stage is order X currently in?", "What is today’s OEE on SMT line 1?", or "Which stage is causing delays for this week’s plan?" and receive answers based on collected and aggregated production data.
 
 ### 2. Problem Statement
-### What’s the Problem?
-Current weather stations require manual data collection, becoming unmanageable with multiple units. There is no centralized system for real-time data or analytics, and third-party platforms are costly and overly complex.
+#### Problem
+In electronics manufacturing SMEs, common issues include:
+- Production planning is done manually in Excel, making it difficult to optimize lines and capacity
+- No real-time tracking of production progress at each stage
+- Order, work order, and reporting data are scattered across many files and systems
+- Difficult to assess line capability, waiting time, and bottlenecks in the process
+- Internal systems are hard to scale, rely on on-premise infrastructure, and lack centralized monitoring
 
-### The Solution
-The platform uses AWS IoT Core to ingest MQTT data, AWS Lambda and API Gateway for processing, Amazon S3 for storage (including a data lake), and AWS Glue Crawlers and ETL jobs to extract, transform, and load data from the S3 data lake to another S3 bucket for analysis. AWS Amplify with Next.js provides the web interface, and Amazon Cognito ensures secure access. Similar to Thingsboard and CoreIoT, users can register new devices and manage connections, though this platform operates on a smaller scale and is designed for private use. Key features include real-time dashboards, trend analysis, and low operational costs.
+#### Solution
+The system provides a centralized web platform for production management and analytics:
+- Backend that handles business logic (orders, work orders, plans, reports) running as containers on ECS
+- Web interface for management, progress tracking, and dashboards of line status
+- Business data stored in RDS with a relational model to support reporting queries
+- Production documents (POM/SOOP, forms) and deployment artifacts stored separately in three S3 buckets
+- Background tasks (e.g., sending notifications, batch processing) use SQS to decouple from the main request flow
+- SNS and SES send alerts and email notifications to managers/engineers when incidents occur
+- CloudWatch and Secrets Manager provide monitoring and secure management of connection information and system configuration
+- An AI component is integrated to query production data using natural language, helping users quickly see order status, production schedules, OEE, Gantt charts, bottlenecks, and simple delays without having to manually filter through many screens and reports
 
-### Benefits and Return on Investment
-The solution establishes a foundational resource for lab members to develop a larger IoT platform, serving as a study resource, and provides a data foundation for AI enthusiasts for model training or analysis. It reduces manual reporting for each station via a centralized platform, simplifying management and maintenance, and improves data reliability. Monthly costs are $0.66 USD per the AWS Pricing Calculator, with a 12-month total of $7.92 USD. All IoT equipment costs are covered by the existing weather station setup, eliminating additional development expenses. The break-even period of 6-12 months is achieved through significant time savings from reduced manual work.
+#### Benefits and Return on Investment
+- Reduce manual work in managing and aggregating production data
+- Improve the ability to track progress and detect delays early on production lines
+- Create a centralized data source to support analytics, reporting, and future AI applications
+- Use AWS infrastructure to reduce upfront capital expenditure, pay per use, and scale with factory growth
 
 ### 3. Solution Architecture
-The platform employs a serverless AWS architecture to manage data from 5 Raspberry Pi-based stations, scalable to 15. Data is ingested via AWS IoT Core, stored in an S3 data lake, and processed by AWS Glue Crawlers and ETL jobs to transform and load it into another S3 bucket for analysis. Lambda and API Gateway handle additional processing, while Amplify with Next.js hosts the dashboard, secured by Cognito. The architecture is detailed below:
+The system uses a cloud architecture deployed on AWS.
+Users access the system via a web interface hosted on Amazon S3 and delivered through CloudFront. Requests are routed via Amazon Route 53 to the backend running on ECS. The backend processes data and stores it in a relational database on Amazon RDS.
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+POM/SOOP files and related documents are stored in a dedicated S3 bucket; the frontend is built and deployed to a separate S3 bucket; deployment artifacts and application packages are stored in another S3 bucket to support the deployment pipeline. Background and asynchronous tasks use Amazon SQS, while notifications and alerts use Amazon SNS and Amazon SES.
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+Sensitive information such as database credentials, API keys, and email configuration is securely managed with AWS Secrets Manager. All logs, metrics, and alarms are monitored centrally via Amazon CloudWatch.
 
-### AWS Services Used
-- **AWS IoT Core**: Ingests MQTT data from 5 stations, scalable to 15.
-- **AWS Lambda**: Processes data and triggers Glue jobs (two functions).
-- **Amazon API Gateway**: Facilitates web app communication.
-- **Amazon S3**: Stores raw data in a data lake and processed outputs (two buckets).
-- **AWS Glue**: Crawlers catalog data, and ETL jobs transform and load it.
-- **AWS Amplify**: Hosts the Next.js web interface.
-- **Amazon Cognito**: Secures access for lab users.
+<img height="500" src="/images/2-Proposal/architecture.jpg" width="500" alt="Proposal Image"/>
 
-### Component Design
-- **Edge Devices**: Raspberry Pi collects and filters sensor data, sending it to IoT Core.
-- **Data Ingestion**: AWS IoT Core receives MQTT messages from the edge devices.
-- **Data Storage**: Raw data is stored in an S3 data lake; processed data is stored in another S3 bucket.
-- **Data Processing**: AWS Glue Crawlers catalog the data, and ETL jobs transform it for analysis.
-- **Web Interface**: AWS Amplify hosts a Next.js app for real-time dashboards and analytics.
-- **User Management**: Amazon Cognito manages user access, allowing up to 5 active accounts.
+#### AWS Services Used
+- Amazon ECS: runs backend production management services
+- Amazon ECR: stores Docker images for backend services
+- Amazon RDS (PostgreSQL/MySQL): stores production data (orders, work orders, plans, progress)
+- Amazon S3 (Bucket 1): stores POM/SOOP files and production documents
+- Amazon S3 (Bucket 2): hosts the frontend (React app)
+- Amazon S3 (Bucket 3): stores deployment artifacts and application packages
+- Amazon CloudFront: delivers frontend via CDN
+- Amazon Route 53: manages domain and DNS routing
+- Amazon SES: sends emails (notifications, alerts, scheduled reports)
+- Amazon SQS: message queue for background tasks, batch jobs, and retries
+- Amazon SNS: sends alerts/notifications to managers and integrates with other channels
+- Amazon CloudWatch: monitors logs, metrics, and sets alarms
+- AWS Secrets Manager: securely stores sensitive information (DB passwords, API keys)
+
+#### Component Design
+**Frontend**
+- Hosted on S3
+- Delivered via CloudFront
+- Provides dashboards and management UI for production (orders, plans, lines)
+
+**Backend**
+- Runs on ECS as containers
+- Handles business logic: orders, work orders, scheduling, reporting, APIs for the frontend
+- Publishes/consumes messages with SQS/SNS to handle background tasks
+
+**Database**
+- RDS stores orders, production plans, progress, production history, and reports
+
+**File Storage**
+- POM/SOOP S3 bucket stores process documents and production instructions
+- Frontend S3 bucket stores the built web application
+- Artifact S3 bucket stores deployment packages and configuration backups
+
+**Security & Monitoring**
+- Secrets Manager stores sensitive configuration
+- CloudWatch collects logs and metrics and sends alerts via SNS/SES
 
 ### 4. Technical Implementation
 **Implementation Phases**
-This project has two parts—setting up weather edge stations and building the weather platform—each following 4 phases:
-- Build Theory and Draw Architecture: Research Raspberry Pi setup with ESP32 sensors and design the AWS serverless architecture (1 month pre-internship)
-- Calculate Price and Check Practicality: Use AWS Pricing Calculator to estimate costs and adjust if needed (Month 1).
-- Fix Architecture for Cost or Solution Fit: Tweak the design (e.g., optimize Lambda with Next.js) to stay cost-effective and usable (Month 2).
-- Develop, Test, and Deploy: Code the Raspberry Pi setup, AWS services with CDK/SDK, and Next.js app, then test and release to production (Months 2-3).
+The project is developed in four phases:
+- Analyze requirements and design the architecture based on the actual AWS stack
+- Build backend containers, push images to ECR, and deploy on ECS
+- Deploy the frontend to S3 + CloudFront and configure the domain via Route 53
+- Integrate RDS, SQS, SNS, SES, Secrets Manager, and CloudWatch; perform end-to-end testing
 
 **Technical Requirements**
-- Weather Edge Station: Sensors (temperature, humidity, rainfall, wind speed), a microcontroller (ESP32), and a Raspberry Pi as the edge device. Raspberry Pi runs Raspbian, handles Docker for filtering, and sends 1 MB/day per station via MQTT over Wi-Fi.
-- Weather Platform: Practical knowledge of AWS Amplify (hosting Next.js), Lambda (minimal use due to Next.js), AWS Glue (ETL), S3 (two buckets), IoT Core (gateway and rules), and Cognito (5 users). Use AWS CDK/SDK to code interactions (e.g., IoT Core rules to S3). Next.js reduces Lambda workload for the fullstack web app.
+**System Requirements**
+- Web application for end users
+- Support storing production content and related documents
+- Provide monitoring, alerting, and email notification mechanisms
+
+**Technology Stack**
+- Backend: Spring Boot (containerized)
+- Frontend: React
+- Database: Amazon RDS (PostgreSQL/MySQL)
+- Cloud: AWS (S3, CloudFront, ECS, ECR, Route 53, CloudWatch, Secrets Manager, SNS, SQS, SES)
 
 ### 5. Timeline & Milestones
-**Project Timeline**
-- Pre-Internship (Month 0): 1 month for planning and old station review.
-- Internship (Months 1-3): 3 months.
-    - Month 1: Study AWS and upgrade hardware.
-    - Month 2: Design and adjust architecture.
-    - Month 3: Implement, test, and launch.
-- Post-Launch: Up to 1 year for research.
+- Pre-development: Clarify functional scope, design the architecture, and define naming for the three S3 buckets
+- Development phase: Complete backend on ECS/ECR and integrate RDS, SQS, SNS, SES
+- Deployment phase: Deploy frontend via S3/CloudFront and connect the domain with Route 53
+- Post-launch: Monitor with CloudWatch and optimize cost and performance based on real data
 
 ### 6. Budget Estimation
-You can find the budget estimation on the [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01).  
-Or you can download the [Budget Estimation File](../attachments/budget_estimation.pdf).
+**Infrastructure Costs**
+The system is deployed on AWS with usage-based monthly costs for a small-scale setup.
+1. Compute (Amazon ECS)
+    - Runs backend container services
+    - Cost: ~ $6.00 / month
+2. Container Registry (Amazon ECR)
+    - Stores images and deployment versions
+    - Cost: ~ $1.00 / month
+3. Database (Amazon RDS)
+    - Stores business data
+    - Cost: ~ $12.00 / month
+4. Storage (Amazon S3 - 3 buckets)
+    - POM/SOOP bucket, frontend bucket, artifact/deploy bucket
+    - Cost: ~ $2.00 / month
+5. CDN (Amazon CloudFront)
+    - Delivers frontend and caches content
+    - Cost: ~ $1.50 / month
+6. DNS (Amazon Route 53)
+    - Manages domain and routing
+    - Cost: ~ $0.50 / month
+7. Queue & Notification (Amazon SQS + SNS)
+    - Handles background tasks and alerts
+    - Cost: ~ $2.00 / month
+8. Email Service (Amazon SES)
+    - Sends notification/verification emails
+    - Cost: ~ $0.50 / month
+9. AWS Secrets Manager
+    - Stores DB credentials and application secrets
+    - Cost: ~ $0.80 / month
+10. Monitoring (Amazon CloudWatch)
+    - Logs, metrics, dashboards, alarms
+    - Cost: ~ $2.50 / month
 
-### Infrastructure Costs
-- AWS Services:
-    - AWS Lambda: $0.00/month (1,000 requests, 512 MB storage).
-    - S3 Standard: $0.15/month (6 GB, 2,100 requests, 1 GB scanned).
-    - Data Transfer: $0.02/month (1 GB inbound, 1 GB outbound).
-    - AWS Amplify: $0.35/month (256 MB, 500 ms requests).
-    - Amazon API Gateway: $0.01/month (2,000 requests).
-    - AWS Glue ETL Jobs: $0.02/month (2 DPUs).
-    - AWS Glue Crawlers: $0.07/month (1 crawler).
-    - MQTT (IoT Core): $0.08/month (5 devices, 45,000 messages).
+**Total Estimated Cost**
+| Service           | Monthly Cost |
+|-------------------|--------------|
+| ECS               | $6.00        |
+| ECR               | $1.00        |
+| RDS               | $12.00       |
+| S3 (3 buckets)    | $2.00        |
+| CloudFront        | $1.50        |
+| Route 53          | $0.50        |
+| SQS + SNS         | $2.00        |
+| SES               | $0.50        |
+| Secrets Manager   | $0.80        |
+| CloudWatch        | $2.50        |
+| **Total**         | **28.80**    |
 
-Total: $0.7/month, $8.40/12 months
+**Annual Cost**
+~ $345.6 / year
 
-- Hardware: $265 one-time (Raspberry Pi 5 and sensors).
+**Development Cost**
+- No physical server investment
+- Uses existing development environment
+- AI API cost depends on usage
 
 ### 7. Risk Assessment
-#### Risk Matrix
-- Network Outages: Medium impact, medium probability.
-- Sensor Failures: High impact, low probability.
-- Cost Overruns: Medium impact, low probability.
+**Risks**
+- Increased costs when traffic grows quickly or RDS queries are not optimized
+- SQS backlog during peak hours
+- Misconfigured secrets causing service connectivity issues
 
-#### Mitigation Strategies
-- Network: Local storage on Raspberry Pi with Docker.
-- Sensors: Regular checks and spares.
-- Cost: AWS budget alerts and optimization.
+**Mitigation Strategies**
+- Set up CloudWatch alarms for ECS, RDS, SQS, SES
+- Optimize queries and indexing on RDS
+- Apply least-privilege IAM and centralized secret management
+- Configure retries and monitor failed messages in queues
 
-#### Contingency Plans
-- Revert to manual methods if AWS fails.
-- Use CloudFormation for cost-related rollbacks.
+**Contingency Plans**
+- Take regular RDS snapshots and test restore procedures
+- Maintain stable image versions in ECR for quick rollback
+- Send immediate alerts via SNS/email when thresholds are exceeded
 
 ### 8. Expected Outcomes
-#### Technical Improvements: 
-Real-time data and analytics replace manual processes.  
-Scalable to 10-15 stations.
-#### Long-term Value
-1-year data foundation for AI research.  
-Reusable for future projects.
+**Technical Improvements**
+- Stable system operation with clear separation of frontend, backend, and data layers
+- Increased scalability and availability thanks to AWS container-based architecture
+- Improved observability and incident handling with CloudWatch + SNS + SES
+- An AI layer that supports Q&A about orders, schedules, OEE, Gantt charts, and simple delays, helping users access information faster and rely less on specialist analysts
+
+**Long-term Value**
+- A solid technical foundation for extending the production management and analytics system, including more advanced AI models in the future (load forecasting, schedule optimization, delay root-cause analysis)
+- Standardized deployment and operations for future versions
+- Optimized operational costs aligned with production growth

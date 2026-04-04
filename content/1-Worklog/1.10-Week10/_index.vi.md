@@ -1,6 +1,6 @@
 ---
 title: "Worklog Tuần 10"
-date: 2024-01-01
+date: 2026-01-01
 weight: 2
 chapter: false
 pre: " <b> 1.10. </b> "
@@ -12,48 +12,31 @@ pre: " <b> 1.10. </b> "
 
 ### Mục tiêu tuần 10:
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Tiếp tục tối ưu hệ thống để tăng hiệu năng và độ ổn định.
+* Rà soát và vẽ lại sơ đồ kiến trúc hệ thống AWS.
+* Kiểm tra lại luồng hoạt động chính sau khi tối ưu.
 
 ### Các công việc cần triển khai trong tuần này:
 | Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| 2   | - Rà soát các điểm nghẽn hiệu năng ở frontend, backend và database <br> - Xác định các hạng mục cần tối ưu như cache, routing và tài nguyên dịch vụ                                             | 16/03/2026   | 16/03/2026      | Kiểm tra nội bộ |
+| 3   | - Tinh chỉnh cấu hình CloudFront, ALB và ECS <br> - Điều chỉnh health check, timeout và triển khai service                                                                                                     | 17/03/2026   | 17/03/2026      | AWS Docs        |
+| 4   | - Rà soát query RDS, kết nối database và luồng đọc secret <br> - Điều chỉnh IAM theo nguyên tắc least privilege nếu cần                                                                                         | 18/03/2026   | 18/03/2026      | AWS Docs        |
+| 5   | - Vẽ lại sơ đồ kiến trúc hệ thống theo trạng thái thực tế <br> - Xác nhận các luồng dịch vụ: CloudFront → S3, ALB → ECS, ECS → RDS, ECS → Secrets Manager                                                             | 19/03/2026   | 19/03/2026      | draw.io + AWS Docs |
+| 6   | - Chạy smoke test sau tối ưu <br> - Ghi nhận log và so sánh trước/sau tối ưu <br> - Hoàn thiện ghi chú để đưa vào báo cáo                                                                                         | 20/03/2026   | 20/03/2026      | Kế hoạch test nội bộ |
 
 
 ### Kết quả đạt được tuần 10:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Tăng độ ổn định hệ thống nhờ tinh chỉnh các thành phần chính của kiến trúc.
+* Tối ưu CloudFront, ALB, ECS và đường truy cập database.
+* Vẽ lại sơ đồ kiến trúc AWS khớp với hệ thống đang triển khai.
+* Xác nhận lại luồng hoạt động chính sau tối ưu:
+  * User → Domain → CloudFront → S3 (FE)
+  * API → ALB → ECS (BE + AI)
+  * ECS → RDS và ECS → Secrets Manager
+* Đã lưu log và ghi chú kiểm thử phục vụ báo cáo cuối kỳ.
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
 
 

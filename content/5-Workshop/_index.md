@@ -1,31 +1,56 @@
 ---
 title: "Workshop"
-date: 2024-01-01
+date: 2026-01-01
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
+
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Secure Hybrid Access to S3 using VPC Endpoints
+## AI Production Management System on AWS – Workshop
 
-#### Overview
+This workshop walks through the end‑to‑end design and deployment of an **AI‑Assisted Electronics Production Management System** on AWS.
 
-**AWS PrivateLink** provides private connectivity to AWS services from VPCs and your on-premises networks, without exposing your traffic to the Public Internet.
+The system is a real project combining:
+- **Backend:** Spring Boot (containerized) running on Amazon ECS Fargate
+- **Frontend:** React (Vite) hosted on Amazon S3 and served via Amazon CloudFront
+- **Database:** Amazon RDS (PostgreSQL)
+- **Infrastructure & Security:** VPC, subnets, security groups, IAM, AWS Secrets Manager, AWS KMS
+- **Messaging & Notifications:** Amazon SQS, Amazon SNS, Amazon SES (OTP & alerts)
+- **Observability:** Amazon CloudWatch Logs, Metrics, Dashboards, and Alarms
 
-In this lab, you will learn how to create, configure, and test VPC endpoints that enable your workloads to reach AWS services without traversing the Public Internet.
+You will see how the architecture from the proposal and architecture diagrams is implemented in practice, from networking and containers to monitoring and alerting.
 
-You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoint, and an Interface VPC endpoint. These two types of VPC endpoints offer different benefits depending on if you are accessing Amazon S3 from the cloud or your on-premises location
-+ **Gateway** - Create a gateway endpoint to send traffic to Amazon S3 or DynamoDB using private IP addresses.You route traffic from your VPC to the gateway endpoint using route tables.
-+ **Interface** - Create an interface endpoint to send traffic to endpoint services that use a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
+#### What You Will Learn
 
-#### Content
+By the end of this workshop, you will be able to:
 
-1. [Workshop overview](5.1-Workshop-overview)
-2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-S3-vpc/)
-4. [Access S3 from On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (Bonus)](5.5-Policy/)
-6. [Clean up](5.6-Cleanup/)
+- Design a **VPC‑based architecture** with public/private subnets, ALB, ECS services, and RDS.
+- Build and package the Spring Boot backend as a Docker image and push it to **Amazon ECR**.
+- Deploy the backend to **Amazon ECS Fargate** behind an **Application Load Balancer**.
+- Build the React frontend and deploy it to **Amazon S3 + CloudFront + Route 53** with HTTPS.
+- Use **Amazon SQS** and **Amazon SNS** to decouple background tasks and alerts.
+- Integrate **Amazon SES** to send OTP emails and production alerts.
+- Apply security best practices with **IAM roles**, an IAM user for SES, **Secrets Manager**, and **KMS** encryption.
+- Configure **CloudWatch Logs**, **metrics**, **dashboards**, and **alarms** (e.g., ECS CPU > 80%) to monitor the system.
+
+#### Target Audience
+
+- Students and engineers who want a concrete example of a production‑style web system on AWS.
+- Developers familiar with basic AWS concepts (EC2/ECS, S3, IAM) and web development (Java/Spring, React).
+
+#### Workshop Modules
+
+This workshop is organized into the following sections (see subfolders under `5-Workshop/`):
+
+1. **[System & Workshop Overview](5.1-overview/)** – business context of the IMS system and how the hands‑on lab is organized.
+2. **[Solution Architecture & IaC](5.2-architecture-iac/)** – overall IMS architecture on AWS and (optional) infrastructure‑as‑code.
+3. **[VPC & Networking](5.3-vpc-networking/)** – VPC, subnets, routing, Internet/NAT gateways, security groups, and connectivity to AWS services.
+4. **[Backend on ECS & RDS](5.4-backend-ecs-rds/)** – Spring Boot containers, ECR repository, ECS task definitions/services, and PostgreSQL schema.
+5. **[Frontend on S3 & CloudFront](5.5-frontend-s3-cloudfront/)** – React build pipeline, S3 static hosting, CloudFront distribution, and domain configuration.
+6. **[Messaging & Notifications (SQS/SNS/SES)](5.6-messaging-notifications-sqs-sns-ses/)** – SQS queues, SNS topics, and SES email/OTP flows.
+7. **[Auth & Secrets](5.7-auth-security-secrets/)** – IAM roles, SES IAM user, Secrets Manager, KMS, and application security patterns.
+8. **[AI & Production Analytics](5.8-ai-production-analytics/)** – how production data (orders, lines, delays, OEE) feeds into AI assistants and reporting.
+9. **[Observability & CI/CD](5.9-observability-ci-cd/)** – CloudWatch logs/metrics/alarms, dashboards, and the buildspec/CodeBuild–ECR–ECS deployment pipeline.
+
+Each section connects directly to the running code in this repository (`backend/` and `frontend/`) and to the AWS resources described in **Idea for AWS project** and **2‑Proposal**.

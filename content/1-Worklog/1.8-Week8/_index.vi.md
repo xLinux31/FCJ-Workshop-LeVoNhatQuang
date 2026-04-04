@@ -1,59 +1,43 @@
 ---
 title: "Worklog Tuần 8"
-date: 2024-01-01
+date: 2026-01-01
 weight: 1
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 
-### Mục tiêu tuần 8:
+### Mục tiêu tuần 7:
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Fix lỗi network giữa ECS và internet.
+* Hoàn thiện kiến trúc mục tiêu:
+	* CloudFront → S3 (Frontend)
+	* ALB → ECS (Backend + AI)
+	* ECS → RDS
+	* ECS → Secrets Manager
+* Test full flow end-to-end:
+	* User → domain → web → AI → DB
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc                                                                                                                                                                                                | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu       |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | -------------------- |
+| 2   | - Điều tra và reproduce lỗi ECS không ra internet <br> - Kiểm tra route table, NAT Gateway/Internet Gateway, NACL, Security Group                                                                    | 02/03/2026   | 02/03/2026      | AWS Docs             |
+| 3   | - Áp dụng fix network cho ECS private subnet <br> - Test lại outbound call và health check                                                                                                             | 03/03/2026   | 03/03/2026      | AWS Docs             |
+| 4   | - Hoàn thiện luồng frontend CloudFront → S3 <br> - Kiểm tra domain và HTTPS                                                                                                                            | 04/03/2026   | 04/03/2026      | AWS Docs             |
+| 5   | - Hoàn thiện luồng backend ALB → ECS (BE + AI) <br> - Xác nhận kết nối ECS tới RDS                                                                                                                     | 05/03/2026   | 05/03/2026      | AWS Docs             |
+| 6   | - Kiểm tra ECS đọc secret từ Secrets Manager <br> - Chạy test full flow: User → domain → web → AI → DB                                                                                                | 06/03/2026   | 06/03/2026      | Kế hoạch test nội bộ |
 
 
-### Kết quả đạt được tuần 8:
+### Kết quả đạt được tuần 7:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+* Đã fix lỗi ECS không outbound internet bằng cách hiệu chỉnh route và security phù hợp.
+* Xác nhận luồng network ổn định để ECS truy cập các dịch vụ bên ngoài khi runtime.
+* Hoàn thiện frontend deployment với CloudFront phân phối nội dung tĩnh từ S3.
+* Hoàn thiện backend routing với ALB điều hướng request vào ECS (BE + AI).
+* Kết nối ECS ↔ RDS hoạt động ổn định cho thao tác đọc/ghi dữ liệu.
+* ECS lấy secret runtime từ Secrets Manager đúng quyền và đúng giá trị.
+* Test end-to-end thành công theo luồng:
+	* User → domain → web → AI → DB
+* Đã lưu log và bằng chứng test phục vụ nghiệm thu, bàn giao.
 
 

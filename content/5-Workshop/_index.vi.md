@@ -1,33 +1,61 @@
 ---
 title: "Workshop"
-date: 2024-01-01
+date: 2025-01-01
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
-
-# Đảm bảo truy cập Hybrid an toàn đến S3 bằng cách sử dụng VPC endpoint
+# Workshop: Triển khai Hệ thống Quản lý Sản Xuất Điện Tử hỗ trợ AI trên AWS
 
 #### Tổng quan
 
-**AWS PrivateLink** cung cấp kết nối riêng tư đến các dịch vụ aws từ VPCs hoặc trung tâm dữ liệu (on-premise) mà không làm lộ lưu lượng truy cập ra ngoài public internet.
+Workshop này hướng dẫn bạn triển khai **Hệ thống Quản lý Sản xuất Điện tử hỗ trợ AI (IMS)** lên AWS.
+Bạn sẽ sử dụng chính **Spring Boot backend** và **React frontend** trong repository này, sau đó triển khai
+chúng lên môi trường gần với production sử dụng các dịch vụ managed của AWS.
 
-Trong bài lab này, chúng ta sẽ học cách tạo, cấu hình, và kiểm tra VPC endpoints để cho phép workload của bạn tiếp cận các dịch vụ AWS mà không cần đi qua Internet công cộng.
+Hệ thống giúp nhà máy quản lý đơn hàng, kế hoạch sản xuất, hiệu suất line và các báo cáo/phân tích bằng AI.
 
-Chúng ta sẽ tạo hai loại endpoints để truy cập đến Amazon S3: gateway vpc endpoint và interface vpc endpoint. Hai loại vpc endpoints này mang đến nhiều lợi ích tùy thuộc vào việc bạn truy cập đến S3 từ môi trường cloud hay từ trung tâm dữ liệu (on-premise).
-+ **Gateway** - Tạo gateway endpoint để gửi lưu lượng đến Amazon S3 hoặc DynamoDB using private IP addresses. Bạn điều hướng lưu lượng từ VPC của bạn đến gateway endpoint bằng các bảng định tuyến (route tables)
-+ **Interface** - Tạo interface endpoint để gửi lưu lượng đến các dịch vụ điểm cuối (endpoints) sử dụng Network Load Balancer để phân phối lưu lượng. Lưu lượng dành cho dịch vụ điểm cuối được resolved bằng DNS.
+**Công nghệ chính:**
+- **Backend:** Spring Boot, JPA/Hibernate, REST API, Java 17
+- **Frontend:** React (Vite), routing theo vai trò (Admin / Manager / Line Leader)
+- **Database:** Amazon RDS (PostgreSQL)
+- **Compute & Containers:** Amazon ECS (Fargate), Amazon ECR, Application Load Balancer (ALB)
+- **Storage & CDN:** Amazon S3 (frontend + tài liệu), Amazon CloudFront
+- **Messaging & Notifications:** Amazon SQS, Amazon SNS, Amazon SES (gửi OTP & thông báo)
+- **Bảo mật & Cấu hình:** AWS Secrets Manager, IAM, AWS KMS, security group
+- **Giám sát & CI/CD:** Amazon CloudWatch, AWS CodeBuild, AWS CodePipeline
 
-#### Nội dung
+#### Bạn sẽ học được gì?
 
-1. [Tổng quan về workshop](5.1-Workshop-overview/)
-2. [Chuẩn bị](5.2-Prerequiste/)
-3. [Truy cập đến S3 từ VPC](5.3-S3-vpc/)
-4. [Truy cập đến S3 từ TTDL On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (làm thêm)](5.5-Policy/)
-6. [Dọn dẹp tài nguyên](5.6-Cleanup/)
+Sau khi hoàn thành workshop, bạn sẽ:
+
+- Thiết kế kiến trúc **VPC với public/private subnets**, ALB, ECS services và RDS.
+- Build và đóng gói backend Spring Boot thành Docker image và push lên **Amazon ECR**.
+- Triển khai backend lên **Amazon ECS Fargate** phía sau **Application Load Balancer**.
+- Build frontend React và deploy lên **Amazon S3 + CloudFront + Route 53** với HTTPS.
+- Sử dụng **Amazon SQS** và **Amazon SNS** để tách rời các tác vụ nền và cảnh báo.
+- Tích hợp **Amazon SES** để gửi email OTP và thông báo sản xuất.
+- Áp dụng best practice bảo mật với **IAM roles**, IAM user cho SES, **Secrets Manager** và mã hóa bằng **KMS**.
+- Cấu hình **CloudWatch Logs**, **metrics**, **dashboards** và **alarms** (ví dụ ECS CPU > 80%) để giám sát hệ thống.
+
+#### Đối tượng phù hợp
+
+- Sinh viên và kỹ sư muốn xem một ví dụ cụ thể về hệ thống web gần production trên AWS.
+- Developer đã nắm cơ bản về AWS (EC2/ECS, S3, IAM) và web (Java/Spring, React).
+
+#### Các phần trong workshop
+
+Workshop được chia thành các phần sau (ứng với các thư mục con trong `5-Workshop/`):
+
+1. **[Tổng quan hệ thống & kịch bản demo](5.1-overview/)** – bối cảnh nghiệp vụ IMS và cách tổ chức các bước hands-on.
+2. **[Kiến trúc giải pháp & Infrastructure-as-Code](5.2-architecture-iac/)** – kiến trúc tổng thể IMS trên AWS và (tuỳ chọn) triển khai bằng IaC.
+3. **[VPC & Networking](5.3-vpc-networking/)** – VPC, subnets, routing, Internet/NAT Gateway, security group và kết nối tới các dịch vụ AWS.
+4. **[Triển khai Backend trên ECS & RDS](5.4-backend-ecs-rds/)** – container Spring Boot, ECR repository, ECS task/service và schema PostgreSQL.
+5. **[Triển khai Frontend với S3 & CloudFront](5.5-frontend-s3-cloudfront/)** – build React, host tĩnh trên S3, CloudFront distribution và cấu hình domain.
+6. **[Messaging & Notifications với SQS, SNS, SES](5.6-messaging-notifications-sqs-sns-ses/)** – SQS queue, SNS topic và luồng gửi email/OTP với SES.
+7. **[Xác thực, bảo mật & quản lý secrets](5.7-auth-security-secrets/)** – IAM roles, IAM user cho SES, Secrets Manager, KMS và các pattern bảo mật trong ứng dụng.
+8. **[Lớp AI phân tích sản xuất](5.8-ai-production-analytics/)** – cách dữ liệu sản xuất (đơn hàng, line, delay, OEE) được dùng cho AI assistant và báo cáo.
+9. **[Quan sát hệ thống & CI/CD Pipeline](5.9-observability-ci-cd/)** – CloudWatch logs/metrics/alarms, dashboard và pipeline buildspec–CodeBuild–ECR–ECS.
+
+Mỗi phần đều gắn trực tiếp với code trong repo (`backend/` và `frontend/`) và các tài nguyên AWS đã mô tả trong **Idea for AWS project** và **2‑Proposal**.

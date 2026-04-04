@@ -1,6 +1,6 @@
 ---
 title: "Week 8 Worklog"
-date: 2024-01-01
+date: 2026-01-01
 weight: 1
 chapter: false
 pre: " <b> 1.8. </b> "
@@ -12,46 +12,36 @@ pre: " <b> 1.8. </b> "
 
 ### Week 8 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Fix network issues between ECS services and the internet.
+* Finalize target architecture:
+	* CloudFront → S3 (Frontend)
+	* ALB → ECS (Backend + AI service)
+	* ECS → RDS
+	* ECS → Secrets Manager
+* Validate full end-to-end flow:
+	* User → domain → web → AI → DB
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task                                                                                                                                                                                                 | Start Date | Completion Date | Reference Material |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ------------------ |
+| 2   | - Investigate and reproduce ECS outbound internet issue <br> - Verify route table, NAT Gateway/Internet Gateway, NACL, and Security Group                                                         | 02/03/2026 | 02/03/2026      | AWS Docs           |
+| 3   | - Apply network fixes for ECS private subnet <br> - Re-test outbound calls and service health checks                                                                                                | 03/03/2026 | 03/03/2026      | AWS Docs           |
+| 4   | - Finalize frontend path CloudFront → S3 <br> - Verify domain and HTTPS behavior                                                                                                                    | 04/03/2026 | 04/03/2026      | AWS Docs           |
+| 5   | - Finalize backend path ALB → ECS (BE + AI) <br> - Validate ECS connectivity to RDS                                                                                                                 | 05/03/2026 | 05/03/2026      | AWS Docs           |
+| 6   | - Validate ECS secret access via Secrets Manager <br> - Execute full flow test: User → domain → web → AI → DB                                                                                     | 06/03/2026 | 06/03/2026      | Internal test plan |
 
 
 ### Week 8 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Fixed ECS outbound internet issue by correcting subnet route path and security configuration.
+* Confirmed stable network path for ECS tasks to access required external services.
+* Completed frontend deployment flow with CloudFront distributing static content from S3.
+* Completed backend routing with ALB forwarding requests to ECS services (Backend + AI).
+* Verified secure runtime secret retrieval from Secrets Manager in ECS tasks.
+* Verified ECS to RDS connectivity for read/write operations.
+* Successfully tested full application flow:
+	* User → domain → web → AI → DB
+* Collected logs and monitoring snapshots for deployment validation and handover.
 
-* Successfully created and configured an AWS Free Tier account.
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...

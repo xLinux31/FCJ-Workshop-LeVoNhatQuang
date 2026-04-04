@@ -1,57 +1,40 @@
 ---
 title: "Week 9 Worklog"
-date: 2024-01-01
+date: 2026-01-01
 weight: 1
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 9 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Draw the architecture of AWS services used in the project.
+* Review and optimize the current system for performance, stability, and cost.
+* Validate optimized end-to-end user flow and document deployment notes.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task                                                                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ------------------ |
+| 2   | - Inventory all AWS services currently in use <br> - Define logical layers (Edge, Frontend, App, Data, Security, Observability) <br> - Draft architecture version 1                                                                                 | 09/03/2026 | 09/03/2026      | AWS Docs           |
+| 3   | - Draw final architecture diagram for workshop stack <br> - Validate request/response paths: CloudFront → S3 and ALB → ECS <br> - Verify data/security paths: ECS → RDS and ECS → Secrets Manager                                                   | 10/03/2026 | 10/03/2026      | draw.io + AWS Docs |
+| 4   | - Optimize frontend delivery: CloudFront cache policy, compression, error fallback <br> - Optimize ALB and ECS health checks/startup grace period <br> - Tune ECS task CPU/memory and deployment settings                                           | 11/03/2026 | 11/03/2026      | AWS Docs           |
+| 5   | - Optimize DB path: connection management, query/index review, timeout settings <br> - Review IAM least privilege for ECS task role and secret access <br> - Add or adjust monitoring/alerts (CloudWatch metrics + logs)                            | 12/03/2026 | 12/03/2026      | AWS Docs           |
+| 6   | - Execute load & functional smoke tests after optimization <br> - Compare before/after metrics (latency, error rate, response time) <br> - Finalize architecture and optimization summary for report                                                   | 13/03/2026 | 13/03/2026      | Internal test plan |
 
 
 ### Week 9 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+* Completed AWS architecture diagram of the implemented system.
+* Documented service interactions across edge, application, database, and secrets layers.
+* Applied key optimizations:
+	* CloudFront caching and compression for static frontend delivery.
+	* ALB and ECS health-check tuning to reduce false unhealthy states.
+	* ECS task resource tuning and safer rolling deployment configuration.
+	* RDS access-path and query/index review for stable response time.
+	* IAM + Secrets Manager policy review for least-privilege secret access.
+* Completed validation after optimization:
+	* User → Domain → CloudFront → S3 (FE)
+	* API calls → ALB → ECS (BE + AI)
+	* ECS → RDS and ECS → Secrets Manager
+* Observed improvements in page/API response stability and reduced deployment interruption.
 
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...

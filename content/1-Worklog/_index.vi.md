@@ -1,6 +1,6 @@
 ---
 title: "Nhật ký công việc"
-date: 2024-01-01
+date: 2026-01-01
 weight: 1
 chapter: false
 pre: " <b> 1. </b> "
@@ -10,31 +10,29 @@ pre: " <b> 1. </b> "
 ⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
 {{% /notice %}}
 
-**Trong trang này** bạn sẽ cần giới thiệu worklog của bạn **như thế nào**? Bạn hoàn thành chương trình trong vòng **bao nhiêu tuần**? Bạn **đã làm gì** trong các tuần đó?
+Trang này tóm tắt worklog 12 tuần thực tập theo đúng các task đã thực hiện thực tế.
 
+**Tuần 1:** [Onboarding, nhận phân công và xây dựng AI prototype đầu tiên (đọc log/CSV)](1.1-week1/)
 
-Thông thường và cũng là tiêu chuẩn, một worklog được thực hiện trong khoảng 3 tháng (trong suốt thời gian thực tập) với nội dung các tuần như sau:
+**Tuần 2:** [Học VPC/EC2, test AI web prototype và nghiên cứu dịch vụ cần thiết](1.2-week2/)
 
-**Tuần 1:** [Làm quen với AWS và các dịch vụ cơ bản trong AWS](1.1-week1/)
+**Tuần 3:** [Tích hợp AI vào backend, pipeline Docker/ECR, deploy ECS và cấu hình ALB/VPC](1.3-week3/)
 
-**Tuần 2:** [Làm công việc A...](1.2-week2/)
+**Tuần 4:** [Kết nối RDS, bảo mật bằng Secrets Manager, hoàn thiện frontend với S3 + CloudFront + Route 53](1.4-week4/)
 
-**Tuần 3:** [Làm công việc B...](1.3-week3/)
+**Tuần 5:** [Fix bug hệ thống và siết Security Group theo luồng ALB -> ECS -> RDS](1.5-week5/)
 
-**Tuần 4:** [Làm công việc C...](1.4-week4/)
+**Tuần 6:** [Thiết lập giám sát CloudWatch, log tập trung và cảnh báo hệ thống](1.6-week6/)
 
-**Tuần 5:** [Làm công việc D...](1.5-week5/)
+**Tuần 7:** [Tối ưu hiệu năng và cải thiện độ ổn định khi vận hành](1.7-week7/)
 
-**Tuần 6:** [Làm công việc E...](1.6-week6/)
+**Tuần 8:** [Fix lỗi ECS không ra internet và kiểm thử full flow kiến trúc end-to-end](1.8-week8/)
 
-**Tuần 7:** [Làm công việc G...](1.7-week7/)
+**Tuần 9:** [Hoàn thiện tài liệu kiến trúc AWS và xác thực các tối ưu theo từng lớp hệ thống](1.9-week9/)
 
-**Tuần 8:** [Làm công việc H...](1.8-week8/)
+**Tuần 10:** [Tiếp tục tối ưu hiệu năng và rà soát kiến trúc sau cập nhật](1.10-week10/)
 
-**Tuần 9:** [Làm công việc I...](1.9-week9/)
+**Tuần 11:** [Tinh chỉnh kiến trúc cuối, smoke test toàn hệ thống và chuẩn bị bàn giao](1.11-week11/)
 
-**Tuần 10:** [Làm công việc L...](1.10-week10/)
+**Tuần 12:** [Tối ưu chi phí, đồng bộ kiến trúc cuối cùng và hoàn thiện báo cáo](1.12-week12/)
 
-**Tuần 11:** [Làm công việc M...](1.11-week11/)
-
-**Tuần 12:** [Làm công việc N...](1.12-week12/)
