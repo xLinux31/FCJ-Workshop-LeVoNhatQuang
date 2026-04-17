@@ -1,125 +1,78 @@
 ---
-title: "Event 2"
-date: 2024-01-01
-weight: 1
+title: "Sự kiện 2"
+date: 2026-04-04
+weight: 2
 chapter: false
-pre: " <b> 4.2. </b> "
+pre: " <b> 3.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+# “Cloud Mastery 2026 #2 DevOps”
 
 ### Mục Đích Của Sự Kiện
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+- Giới thiệu tổng quan về Kubernetes, Infrastructure as Code (IaC) và Elixir.
+- Cung cấp nền tảng về cách xây dựng, triển khai và vận hành hệ thống trên Cloud.
+- Kết nối kiến thức lý thuyết với thực tiễn thông qua demo.
 
-### Danh Sách Diễn Giả
+### Chi Tiết Diễn Giả & Chủ Đề Trình Bày
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+**1. Bao Huynh - Junior Cloud Native Developer - Endava Vietnam**  
+* **Chủ đề:** Kubernetes  
+* **Nội dung chính:** Kubernetes tập trung vào việc giải quyết các thách thức trong container orchestration, bắt đầu từ việc giới thiệu tổng quan, kiến trúc và các thành phần cốt lõi của hệ thống. Phần trình bày đi sâu vào các Kubernetes objects quan trọng, cách làm việc với Manifests và sử dụng kubectl. Đồng thời có demo thực tế, hướng dẫn cách bắt đầu học Kubernetes, định hướng lộ trình học hiệu quả và giới thiệu các công cụ hỗ trợ như Helm và K9S.
+
+**2. Thinh Nguyen - DevOps Engineer**  
+* **Chủ đề:** Infrastructure as Code với Terraform trên AWS  
+* **Nội dung chính:** Phần trình bày tập trung vào khái niệm Infrastructure as Code (IaC), vai trò của IaC trong việc quản lý hạ tầng hiện đại. Nội dung bao gồm tổng quan các công cụ IaC, giới thiệu AWS CloudFormation, AWS CDK và Terraform, cùng với demo triển khai hạ tầng thực tế trên AWS.
+
+**3. Nguyen Ta Minh Triet - SAP Developer Intern, Bosch GSV**  
+* **Chủ đề:** Giới thiệu Elixir  
+* **Nội dung chính:** Trình bày các kiến thức nền tảng của Elixir, cách lập trình đồng thời (concurrent programming), cơ chế OTP để đạt fault-tolerance, ứng dụng Elixir trong DevOps pipeline, kèm theo demo trực tiếp và các ví dụ thực tế.
 
 ### Nội Dung Nổi Bật
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+#### 1. Kubernetes trong thực tế
+- Phân tích các thách thức trong container orchestration.
+- Hiểu rõ kiến trúc và các thành phần cốt lõi của Kubernetes.
+- Làm việc với Kubernetes objects, Manifests và kubectl.
+- Quan sát demo triển khai thực tế.
+- Định hướng cách bắt đầu và học Kubernetes hiệu quả.
+- Làm quen với các công cụ hỗ trợ như Helm và K9S.
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+#### 2. Infrastructure as Code (IaC) trên AWS
+- Hiểu rõ Infrastructure as Code là gì và vai trò trong DevOps.
+- So sánh các công cụ IaC phổ biến.
+- Tiếp cận AWS CloudFormation, AWS CDK và Terraform.
+- Quan sát demo triển khai hạ tầng bằng Terraform.
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
-
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
-
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
-
-#### Domain-Driven Design (DDD)
-
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
-
-#### Event-Driven Architecture
-
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
-
-#### Compute Evolution
-
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
-
-#### Amazon Q Developer
-
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
-
-### Những Gì Học Được
-
-#### Tư Duy Thiết Kế
-
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
-
-#### Kiến Trúc Kỹ Thuật
-
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
-
-#### Chiến Lược Hiện Đại Hóa
-
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
-
-### Ứng Dụng Vào Công Việc
-
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
+#### 3. Elixir và hệ thống chịu tải cao
+- Nắm được các kiến thức nền tảng của Elixir.
+- Hiểu cơ chế concurrent programming trong Elixir.
+- Tìm hiểu OTP và cách xây dựng hệ thống có fault-tolerance.
+- Ứng dụng Elixir trong DevOps pipeline.
+- Quan sát demo và các ví dụ thực tế.
 
 ### Trải nghiệm trong event
 
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
+- Tham gia sự kiện giúp củng cố nền tảng về Cloud, DevOps và Backend hiện đại.
 
 #### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
+- Hiểu rõ tư duy thiết kế và vận hành hệ thống theo chuẩn thực tế.
+- Nắm được cách tiếp cận công nghệ một cách bài bản.
 
 #### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
+- Quan sát trực tiếp demo từ Kubernetes, Terraform và Elixir.
+- Hiểu rõ cách các công nghệ phối hợp trong một hệ thống hoàn chỉnh.
 
 #### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
+- Biết cách sử dụng Kubernetes để quản lý container.
+- Áp dụng IaC để tự động hóa hạ tầng.
+- Hình dung việc sử dụng Elixir trong các hệ thống cần xử lý song song cao.
 
 #### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
+- Có cơ hội trao đổi với các anh chị có kinh nghiệm thực tế.
+- Tiếp nhận thêm nhiều góc nhìn về phát triển hệ thống và sản phẩm.
 
 #### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
-
-#### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+- Việc lựa chọn công nghệ cần dựa trên bài toán thực tế.
+- Tự động hóa và khả năng mở rộng là yếu tố cốt lõi trong hệ thống hiện đại.
+- Kết hợp đúng công cụ sẽ giúp xây dựng hệ thống hiệu quả và bền vững.

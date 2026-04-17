@@ -6,56 +6,55 @@ chapter: false
 pre: " <b> 4. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Các Event Tôi Đã Tham Gia
 
-> Trong phần này, các bạn cần liệt kê và mô tả chi tiết các sự kiện (event) mà mình đã tham gia trong suốt quá trình thực tập hoặc làm việc. 
-> 
-> Mỗi sự kiện nên được trình bày theo định dạng Event 1, Event 2, Event 3…, kèm theo các thông tin:
-> * Tên sự kiện
-> * Thời gian tổ chức
-> * Địa điểm (nếu có)
-> * Vai trò của bạn trong sự kiện (người tham dự, hỗ trợ tổ chức, diễn giả, v.v.)
-> * Mô tả ngắn gọn nội dung và hoạt động chính trong sự kiện
-> * Kết quả hoặc giá trị đạt được (bài học, kỹ năng mới, đóng góp cho nhóm/dự án)
-> * Việc liệt kê này giúp thể hiện rõ sự tham gia thực tế của bạn, cũng như các kỹ năng mềm và kinh nghiệm bạn đã tích lũy qua từng sự kiện.
-
-
-Trong quá trình thực tập, em đã tham gia 2 events, với mỗi event là một trải nghiệm đáng nhớ với những kiến thức mới, hay và bổ ích, cùng với đó là nhứng món quà và những khoảnh khắc rất tuyệt vời.
+Trong quá trình thực tập và tham gia workshop, tôi đã tham gia 3 sự kiện kỹ thuật liên quan đến hiện đại hóa ứng dụng, DevOps và bảo mật trên AWS. Mỗi sự kiện đều mang lại kiến thức thực tiễn và góc nhìn rõ ràng hơn về cách xây dựng hệ thống trên cloud.
 
 ### [Event 1](4.1-Event1/)
-&emsp;**Tên sự kiện:** Cloud Mastery AI From Scratch
-
-&emsp;**Thời gian:** 09:00 ngày 14/02/2026
-
-&emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
-
-&emsp;**Vai trò trong sự kiện:** Người tham dự
-
-&emsp;**Nội dung và hoạt động chính:** 
-- Trình bày session “Automated Prompt Engineering: Enhancing LLM Output Quality”.
-- Giới thiệu tầm quan trọng của prompt và cách xây dựng prompt hiệu quả (role, instruction, context, examples, constraints).
-- Chia sẻ các kỹ thuật nâng cao như Chain-of-Thought, RAG, role prompting để cải thiện chất lượng và chi phí khi sử dụng LLM.
-- Định hướng cách bắt đầu xây dựng AI Agent cho người mới.
-- Giới thiệu 2 dự án:
-   + Locker Management (AIoT): tích hợp AWS IoT Core, Amazon Rekognition, RFID, cảm biến và camera để quản lý mượn/trả thiết bị.
-   + Plutus: ứng dụng quản lý chi tiêu, sử dụng Amazon Textract để xử lý OCR hóa đơn thông minh.
-- Tham gia Q&A, trao đổi với sinh viên về AI, Cloud và IoT.
-
-&emsp;**Kết quả hoặc giá trị đạt được:**
-- Nâng cao hiểu biết về Prompt Engineering và cách làm việc với LLM hiệu quả.
-- Tiếp cận kiến thức về AI Agent và tích hợp AI với Cloud (AWS).
-- Phát triển kỹ năng lắng nghe, đặt câu hỏi và tư duy phản biện.
-- Học hỏi được cách áp dụng lý thuyết vào các dự án thực tế (AIoT, OCR, Cloud).
-Nhận thức rõ hơn về tầm quan trọng của việc xây dựng sản phẩm thực tế thay vì chỉ học lý thuyết.
-
-### [Event 2](4.2-Event2/)
 &emsp;**Tên sự kiện:** GenAI-powered App-DB Modernization workshop
 
-&emsp;**Thời gian:** 09:00 ngày 13/08/2025
+&emsp;**Vai trò:** Người tham dự
 
-&emsp;**Địa điểm:** Tầng 26, tòa nhà Bitexco, số 02 đường Hải Triều, phường Sài Gòn, thành phố Hồ Chí Minh
+&emsp;**Nội dung chính:**
+- Tìm hiểu chiến lược hiện đại hóa ứng dụng và cơ sở dữ liệu.
+- Tiếp cận Domain-Driven Design (DDD), bounded contexts và event-driven architecture.
+- So sánh các hướng tích hợp và lựa chọn compute (sync/async, VM/containers/serverless).
+- Làm quen với Amazon Q Developer và vai trò của AI trong SDLC.
 
-&emsp;**Vai trò trong sự kiện:** Người tham dự 
+&emsp;**Giá trị đạt được:**
+- Nâng cao tư duy kiến trúc theo hướng business-first.
+- Hiểu rõ hơn về lộ trình hiện đại hóa theo giai đoạn và đo lường ROI.
+- Có định hướng áp dụng event-driven và serverless vào dự án thực tế.
+
+### [Event 2](4.2-Event2/)
+&emsp;**Tên sự kiện:** Cloud Mastery 2026 #2 DevOps
+
+&emsp;**Vai trò:** Người tham dự
+
+&emsp;**Nội dung chính:**
+- Học nền tảng Kubernetes, kiến trúc và cách triển khai thực tế.
+- Tìm hiểu Infrastructure as Code (IaC) với Terraform trên AWS.
+- Tiếp cận Elixir, lập trình đồng thời và OTP cho hệ thống chịu lỗi tốt.
+- Quan sát demo trực tiếp để thấy cách các công nghệ phối hợp trong một hệ thống hoàn chỉnh.
+
+&emsp;**Giá trị đạt được:**
+- Củng cố nền tảng DevOps về orchestration, automation và backend.
+- Cải thiện tư duy lựa chọn công nghệ theo bài toán thực tế.
+- Tăng tự tin khi thiết kế hệ thống cloud có khả năng mở rộng và dễ vận hành.
+
+### [Event 3](4.3-Event3/)
+&emsp;**Tên sự kiện:** Cloud Mastery 2026 #3 AWS Security & Networking
+
+&emsp;**Vai trò:** Người tham dự
+
+&emsp;**Nội dung chính:**
+- Học IAM best practices, SSO, SCP và permission boundaries.
+- Tìm hiểu thiết kế mạng AWS với VPC, CIDR, subnet, route table, IGW và VPC endpoint.
+- Tiếp cận các dịch vụ bảo vệ hệ thống gồm AWS WAF, Shield, Network Firewall và Firewall Manager.
+- Quan sát demo thực tế về cấu hình bảo mật và networking trên AWS.
+
+&emsp;**Giá trị đạt được:**
+- Hiểu rõ hơn cách thiết kế kiến trúc cloud theo hướng secure-by-design.
+- Nâng cao khả năng cân bằng giữa bảo mật, hiệu năng và khả năng mở rộng.
+- Tăng nhận thức về quản lý truy cập và bảo vệ mạng trong môi trường production.
 
